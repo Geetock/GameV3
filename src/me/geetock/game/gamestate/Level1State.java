@@ -3,37 +3,40 @@ package me.geetock.game.gamestate;
 import java.awt.Graphics;
 
 import me.geetock.game.entities.Player;
+import me.geetock.game.mapping.Map;
 
 public class Level1State extends GameState {
 	
 	private Player player;
+	private Map map;
 
 	public Level1State(GameStateManager gsm) {
 		super(gsm);
-		
 	}
 
 	@Override
 	public void init() {
-		
 		player = new Player(30, 30);
+		map = new Map("/map1.map");
+		
+		xOffset = -200;
+		yOffset = -400;
 	}
 
 	@Override
 	public void tick() {
-		
-		player.tick();
+		player.tick(map.getBlocks());
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		
 		player.draw(g);
+		map.draw(g);
+		
 	}
 
 	@Override
 	public void keyPressed(int k) {
-		
 		player.keyPressed(k);
 	}
 
